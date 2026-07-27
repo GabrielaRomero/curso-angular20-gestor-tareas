@@ -3,35 +3,42 @@
   <h1> {{ title }} </h1>
 
   <p>
-    Total: {{ totalTareas() }} |
-    Completadas: {{ completadas() }} |
-    Pendientes: {{ pendientes() }}
+    Total: {{ store.totalTareas() }} |
+    Completadas: {{ store.completadas() }} |
+   Pendientes: {{ store.pendientes() }}
+
   </p>
 
-  <div class="nueva-tarea">
-    <input type="text"  #inputTarea placeholder="Nueva Tarea" 
-    (keyup.enter)="agregarTarea(inputTarea.value); inputTarea.value = ''" />
-   
-   <button (click)="agregarTarea(inputTarea.value); inputTarea.value = ''">Agregar</button>
- 
- 
+  <div class="formulario-borde">
+    <div class="nueva-tarea">
+      <input type="text"  #inputTarea placeholder="Nueva Tarea" 
+      (keyup.enter)="store.agregar(inputTarea.value); inputTarea.value = ''" />
+     
+     <button (click)="store.agregar(inputTarea.value); inputTarea.value = ''">Agregar</button>
+
+    </div>
   </div>
 
+  <div class="acciones-centro">
+   <button (click)="store.limpiarCompletadas();" [disabled]="store.completadas() === 0">Eliminar Completadas</button>
+  </div>
+ 
+ 
 
   <ul>
- @for (tarea of tarea(); track tarea.id) {
-   <li (click)="tuggle(tarea.id)" [class.hecha]="tarea.completada"> 
-       {{ tarea.titulo }}
-        @if(tarea.completada){
+ @for (tareas of store.tareas(); track tareas.id) {
+   <li (click)="store.toggle(tareas.id)" [class.hecha]="tareas.completada"> 
+       {{ tareas.titulo }}
+        @if(tareas.completada){
           <span>OK</span>
          
         }
 
-         <button (click)="eliminarTarea(tarea.id)">Eliminar</button>
+         <button  class="btn-eliminar" (click)="store.eliminar(tareas.id);$event.stopPropagation()" >Eliminar</button>
    </li>
 
  } @empty {
-  <li> No hay tareas !! Agerga una !!  </li>
+  <li> No hay tareas !! Agrega una !!  </li>
  }
 </ul> 
 

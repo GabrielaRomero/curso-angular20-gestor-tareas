@@ -2,6 +2,9 @@ main {
   max-width: 480px;
   margin: 3rem auto;
   font-family: system-ui, sans-serif;
+  border: 1px solid #d8d8d8;
+  border-radius: 10px;
+  padding: 1rem;
 }
 
 h1 {
@@ -9,8 +12,13 @@ h1 {
 }
 
 .contador {
-  color: #666;
+  color: #b40808;
   margin-top: 0;
+}
+
+.formulario-borde {
+  padding: 0;
+  margin-bottom: 1rem;
 }
 
 .nueva-tarea {
@@ -30,10 +38,49 @@ h1 {
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 6px;
-  background: #d81b60;
+  background: #654321;
   color: white;
   cursor: pointer;
 }
+
+
+/* Estilos botón limpiar completadas */
+.acciones-centro {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.acciones-centro button {
+   padding: 0.5rem 1rem;
+  background: #654321;
+  border-radius: 6px;
+  color: white;
+}
+
+.acciones-centro button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+/* Estilos botón eliminar tarea */
+.btn-eliminar {
+  background: #D2691E;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.35rem 0.7rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.btn-eliminar:active {
+  transform: scale(0.98);
+}
+
+
+
 
 ul {
   list-style: none;

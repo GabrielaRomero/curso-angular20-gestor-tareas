@@ -1,0 +1,18 @@
+
+<!--Componente atómo, entre mas simple mejor
+    Se realiza la configuarazion del atomo colocando las referencias a sus parametros de entrada y salida 
+    Para la popiedades colocar task()  que indica que es la entrada de nuestra clase pojo 
+    Para los eventos del botiones colocar el parametro de salida correpondiente, indicando el evento que se va emitir 
+-->
+
+<li (click)="toggle.emit(task().id)" [class.hecha]="task().completada"> 
+       {{ task().titulo }}
+        @if(task().completada){
+          <span>OK</span>
+         
+        }
+
+         <button  class="btn-eliminar" (click)="removed.emit(task().id);$event.stopPropagation()" >Eliminar</button>
+   </li>
+
+

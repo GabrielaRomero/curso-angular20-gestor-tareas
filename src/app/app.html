@@ -1,23 +1,21 @@
 
 <main>
+
   <h1> {{ title }} </h1>
 
   <p>
     Total: {{ store.totalTareas() }} |
     Completadas: {{ store.completadas() }} |
-   Pendientes: {{ store.pendientes() }}
-
+    Pendientes: {{ store.pendientes() }}
   </p>
 
   <div class="formulario-borde">
-    <div class="nueva-tarea">
-      <input type="text"  #inputTarea placeholder="Nueva Tarea" 
-      (keyup.enter)="store.agregar(inputTarea.value); inputTarea.value = ''" />
-     
-     <button (click)="store.agregar(inputTarea.value); inputTarea.value = ''">Agregar</button>
-
-    </div>
+    <app-task-form
+      (agregado)="store.agregar($event)"> 
+    </app-task-form>
   </div>
+
+
 
   <div class="acciones-centro">
    <button (click)="store.limpiarCompletadas();" [disabled]="store.completadas() === 0">Eliminar Completadas</button>
@@ -26,29 +24,18 @@
  
 
   <ul>
- @for (tareas of store.tareas(); track tareas.id) {
-   <li (click)="store.toggle(tareas.id)" [class.hecha]="tareas.completada"> 
-       {{ tareas.titulo }}
-        @if(tareas.completada){
-          <span>OK</span>
-         
-        }
-
-         <button  class="btn-eliminar" (click)="store.eliminar(tareas.id);$event.stopPropagation()" >Eliminar</button>
-   </li>
-
- } @empty {
-  <li> No hay tareas !! Agrega una !!  </li>
- }
+    @for (tareas of store.tareas(); track tareas.id) {
+      <app-task-item 
+        [task]="tareas" 
+        (toggle)="store.toggle($event)" 
+        (removed)="store.eliminar($event)">
+      </app-task-item>
+    } @empty {
+      <li> No hay tareas !! Agrega una !!  </li>
+  }
 </ul> 
 
 
 
 </main>
-
-
-
-
-
-
 <router-outlet />
